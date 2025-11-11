@@ -31,14 +31,14 @@ export const Alert = ({ type = 'info', message, onClose }) => {
 
   return (
     <div className={`${styles[type]} border-2 rounded-xl p-4 flex items-start gap-3 animate-slide-up`}>
-      <div className="flex-shrink-0 mt-0.5">
+      <div className="shrink-0 mt-0.5">
         {icons[type]}
       </div>
       <p className="flex-1 text-sm font-medium">{message}</p>
       {onClose && (
         <button
           onClick={onClose}
-          className="flex-shrink-0 text-current opacity-50 hover:opacity-100 transition-opacity"
+          className="shrink-0 text-current opacity-50 hover:opacity-100 transition-opacity"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

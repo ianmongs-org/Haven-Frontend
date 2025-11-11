@@ -83,7 +83,7 @@ export const StatisticsCard = () => {
             className="glass-effect rounded-xl p-4 hover:shadow-lg transition-all duration-300"
           >
             <div className="flex items-center gap-3">
-              <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center text-white shadow-lg`}>
+              <div className={`w-12 h-12 rounded-lg bg-linear-to-br ${stat.color} flex items-center justify-center text-white shadow-lg`}>
                 {stat.icon}
               </div>
               <div>

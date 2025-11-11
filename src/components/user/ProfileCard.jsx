@@ -12,7 +12,7 @@ export const ProfileCard = ({ user }) => {
   return (
     <Card className="animate-fade-in">
       <div className="flex flex-col items-center text-center">
-        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg">
+        <div className="w-24 h-24 rounded-full bg-linear-to-br from-primary-400 to-accent-400 flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg">
           {user?.full_name?.charAt(0).toUpperCase() || 'U'}
         </div>
         

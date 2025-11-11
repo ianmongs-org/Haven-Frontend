@@ -16,7 +16,7 @@ export const LoadingSpinner = ({ size = 'md', fullScreen = false }) => {
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+      <div className="fixed inset-0 flex items-center justify-center bg-linear-to-br from-gray-50 via-blue-50 to-purple-50">
         {spinner}
       </div>
     );
