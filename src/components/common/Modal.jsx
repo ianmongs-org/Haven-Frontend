@@ -20,8 +20,8 @@ export const Modal = ({ isOpen, onClose, title, children }) => {
         className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
         onClick={onClose}
       />
-      <div className="relative glass-effect rounded-2xl p-6 max-w-md w-full animate-slide-up">
-        <div className="flex items-center justify-between mb-4">
+      <div className="relative glass-effect rounded-2xl max-w-2xl w-full animate-slide-up max-h-[90vh] flex flex-col">
+        <div className="flex items-center justify-between p-6 pb-4 shrink-0">
           <h3 className="text-xl font-bold text-gray-900">{title}</h3>
           <button
             onClick={onClose}
@@ -32,7 +32,9 @@ export const Modal = ({ isOpen, onClose, title, children }) => {
             </svg>
           </button>
         </div>
-        {children}
+        <div className="overflow-y-auto p-6 pt-0">
+          {children}
+        </div>
       </div>
     </div>
   );

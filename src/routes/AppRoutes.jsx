@@ -8,6 +8,8 @@ import { ForgotPasswordPage } from '../pages/auth/ForgotPasswordPage';
 import { ResetPasswordPage } from '../pages/auth/ResetPasswordPage';
 import { DashboardPage } from '../pages/dashboard/DashboardPage';
 import { ProfilePage } from '../pages/profile/ProfilePage';
+import { ChatPage } from '../pages/chat/ChatPage';
+import { InsightsPage } from '../pages/insights/InsightsPage';
 import { ROUTES } from '../utils/constants';
 
 export const AppRoutes = () => {
@@ -61,6 +63,8 @@ export const AppRoutes = () => {
           </PublicRoute>
         }
       />
+      
+      {/* Protected Routes */}
       <Route
         path={ROUTES.DASHBOARD}
         element={
@@ -77,7 +81,32 @@ export const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+      <Route
+        path={ROUTES.CHAT}
+        element={
+          <ProtectedRoute>
+            <ChatPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={ROUTES.CHAT_SESSION}
+        element={
+          <ProtectedRoute>
+            <ChatPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={ROUTES.INSIGHTS}
+        element={
+          <ProtectedRoute>
+            <InsightsPage />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
     </Routes>
   );
 };

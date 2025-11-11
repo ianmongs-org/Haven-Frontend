@@ -17,7 +17,7 @@ export const DashboardPage = () => {
       ),
       color: 'from-blue-500 to-blue-600',
       action: 'Start Chat',
-      comingSoon: true,
+      link: ROUTES.CHAT,
     },
     {
       title: 'Insights',
@@ -29,7 +29,7 @@ export const DashboardPage = () => {
       ),
       color: 'from-purple-500 to-purple-600',
       action: 'View Insights',
-      comingSoon: true,
+      link: ROUTES.INSIGHTS,
     },
     {
       title: 'Your Profile',
@@ -58,38 +58,32 @@ export const DashboardPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {features.map((feature, index) => (
-          <Card 
-            key={index} 
-            className="animate-slide-up hover:scale-105 cursor-pointer"
-            style={{ animationDelay: `${index * 100}ms` }}
+          <Link
+            to={feature.link}
+            key={index}
+            className="block"
           >
-            <div className={`w-16 h-16 rounded-xl bg-linear-to-br ${feature.color} flex items-center justify-center text-white mb-4 shadow-lg`}>
-              {feature.icon}
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              {feature.title}
-            </h3>
-            <p className="text-gray-600 mb-4">
-              {feature.description}
-            </p>
-            {feature.comingSoon ? (
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500">
-                <span className="px-3 py-1 rounded-full bg-gray-100">
-                  Coming Soon
-                </span>
+            <Card
+              className="animate-slide-up hover:scale-105 cursor-pointer h-full"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className={`w-16 h-16 rounded-xl bg-linear-to-br ${feature.color} flex items-center justify-center text-white mb-4 shadow-lg`}>
+                {feature.icon}
               </div>
-            ) : (
-              <Link
-                to={feature.link}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors"
-              >
+              <h3 className="text-xl font-bold text-gray-900 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600 mb-4">
+                {feature.description}
+              </p>
+              <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">
                 {feature.action}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </Link>
-            )}
-          </Card>
+              </div>
+            </Card>
+          </Link>
         ))}
       </div>
 
@@ -108,8 +102,8 @@ export const DashboardPage = () => {
               If you're experiencing a mental health emergency, please reach out to a crisis helpline or emergency services immediately.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a 
-                href="tel:988" 
+              <a
+                href="tel:988"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,8 +111,8 @@ export const DashboardPage = () => {
                 </svg>
                 Call 988
               </a>
-              <a 
-                href="sms:741741" 
+              <a
+                href="sms:741741"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold rounded-lg border-2 border-gray-200 transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
