@@ -85,7 +85,6 @@ export const InsightsPage = () => {
       addToast("Failed to submit feedback", "error");
     }
   };
-
   return (
     <>
       <div className="flex flex-col min-h-screen">

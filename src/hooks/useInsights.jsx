@@ -3,6 +3,10 @@ import insightService from "../services/insight.service";
 import { useToast } from "../context/ToastContext";
 import { usePaginate } from "./usePaginate";
 
+const randomNumber = () => {
+  return Math.floor(Math.random() * 3) + 1;
+};
+
 export const useInsights = () => {
   const [insights, setInsights] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,5 +35,14 @@ export const useInsights = () => {
   useEffect(() => {
     fetchInsights();
   }, [pagination.pageParams.page]);
-  return { insights, isLoading, error };
+  const formattedInsights = insights.map((insight) => ({
+    ...insight,
+    index:
+      insight.priority === "HIGH"
+        ? 3 + randomNumber()
+        : insight.priority === "MEDIUM"
+        ? 2 + randomNumber()
+        : 1 + randomNumber(),
+  }));
+  return { formattedInsights, isLoading, error };
 };
