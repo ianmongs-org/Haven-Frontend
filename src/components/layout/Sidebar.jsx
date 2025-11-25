@@ -12,14 +12,29 @@ import {
 
 const SidebarContext = createContext();
 
-export default function Sidebar({ children }) {
+export default function Sidebar({
+  children,
+  isOpen: controlledIsOpen,
+  onToggle,
+}) {
   const { user, logout } = useAuth();
-  const [isOpen, setIsOpen] = useState(true);
+  const [internalIsOpen, setInternalIsOpen] = useState(true);
+
+  const isOpen =
+    controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
   const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+    if (onToggle) {
+      onToggle(!isOpen);
+    } else {
+      setInternalIsOpen(!isOpen);
+    }
   };
   return (
-    <aside className="h-screen">
+    <aside
+      className={`fixed top-0 left-0 h-screen z-50 transition-all duration-300 ease-in-out ${
+        isOpen ? "w-72" : "w-20"
+      }`}
+    >
       <nav className="h-full flex flex-col bg-white border-r border-gray-50 shadow-xs">
         <div
           className={`p-4 pb-2 mt-4 flex items-center justify-between overflow-hidden transition-all duration-300 ease-in-out ${
@@ -48,8 +63,10 @@ export default function Sidebar({ children }) {
           </button>
         </div>
 
-        <SidebarContext.Provider value={{ isOpen }}>
-          <ul className="flex-1 px-3 mt-4">{children}</ul>
+        <SidebarContext.Provider
+          value={{ isOpen, sidebarWidth: isOpen ? 288 : 80 }}
+        >
+          <ul className="flex-1 px-3 mt-4 overflow-hidden">{children}</ul>
         </SidebarContext.Provider>
 
         <div className="border-t border-gray-200 my-1 flex p-3">
@@ -126,7 +143,7 @@ export function SidebarItem({ icon, label, active, alert }) {
     >
       {icon}
       <span
-        className={`overflow-hidden transition-all duration-300 ease-in-out font-normal ${
+        className={`overflow-hidden transition-all duration-300 ease-in-out font-normal text-sm ${
           isOpen ? "w-52 ml-3" : "w-0"
         }`}
       >
