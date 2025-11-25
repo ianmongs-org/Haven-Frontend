@@ -3,6 +3,12 @@ import { LOGO } from "../../assets";
 import { IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
 import { useAuth } from "../../hooks/useAuth";
 import { IconSettingsFilled } from "@tabler/icons-react";
+import {
+  IconUserFilled,
+  IconLayout2Filled,
+  IconMessage2Filled,
+  IconChartAreaFilled,
+} from "@tabler/icons-react";
 
 const SidebarContext = createContext();
 
@@ -55,7 +61,7 @@ export default function Sidebar({ children }) {
               isOpen ? "w-52 ml-3 " : "w-0"
             }`}
           >
-            <div className="text-left hidden sm:block">
+            <div className="text-left">
               <p className="text-sm font-semibold text-gray-900">
                 {user?.full_name}
               </p>
@@ -71,12 +77,43 @@ export default function Sidebar({ children }) {
   );
 }
 
+export function AppSidebar() {
+  return (
+    <div className="flex flex-col items-center justify-between gap-1">
+      <SidebarItem
+        icon={<IconLayout2Filled className="w-6 h-6" />}
+        label="Dashboard"
+        active={true}
+        alert={false}
+      />
+      <SidebarItem
+        icon={<IconMessage2Filled className="w-6 h-6" />}
+        label="Chat"
+        active={false}
+        alert={true}
+      />
+      <SidebarItem
+        icon={<IconChartAreaFilled className="w-6 h-6" />}
+        label="Insights"
+        active={false}
+        alert={false}
+      />
+      <SidebarItem
+        icon={<IconUserFilled className="w-6 h-6" />}
+        label="Profile"
+        active={false}
+        alert={true}
+      />
+    </div>
+  );
+}
+
 export function SidebarItem({ icon, label, active, alert }) {
   const { isOpen } = useContext(SidebarContext);
   return (
     <li
       className={`
-    relative group flex items-center py-2 my-4 gap-1 pl-1 font-medium cursor-pointer transition-colors
+    relative group flex items-center py-2 my-2 gap-1 pl-1 font-medium cursor-pointer transition-colors
     ${
       active
         ? "border-l-3 border-primary-500"

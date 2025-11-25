@@ -2,20 +2,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { Card } from "../../components/common/Card";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../utils/constants";
-import Sidebar, { SidebarItem } from "../../components/layout/Sidebar";
-import {
-  IconHome,
-  IconMessageCircle,
-  IconEye,
-  IconUser,
-} from "@tabler/icons-react";
-import {} from "@tabler/icons-react";
-import {
-  IconUserFilled,
-  IconLayout2Filled,
-  IconMessage2Filled,
-  IconChartAreaFilled,
-} from "@tabler/icons-react";
+import Sidebar, { AppSidebar } from "../../components/layout/Sidebar";
 
 export const DashboardPage = () => {
   const { user } = useAuth();
@@ -92,30 +79,7 @@ export const DashboardPage = () => {
   return (
     <div className="flex">
       <Sidebar>
-        <SidebarItem
-          icon={<IconLayout2Filled className="w-6 h-6" />}
-          label="Dashboard"
-          active={true}
-          alert={false}
-        />
-        <SidebarItem
-          icon={<IconMessage2Filled className="w-6 h-6" />}
-          label="Chat"
-          active={false}
-          alert={true}
-        />
-        <SidebarItem
-          icon={<IconChartAreaFilled className="w-6 h-6" />}
-          label="Insights"
-          active={false}
-          alert={false}
-        />
-        <SidebarItem
-          icon={<IconUserFilled className="w-6 h-6" />}
-          label="Profile"
-          active={false}
-          alert={true}
-        />
+        <AppSidebar />
       </Sidebar>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 animate-fade-in">
