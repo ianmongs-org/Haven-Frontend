@@ -27,7 +27,7 @@ export const InsightsPage = () => {
       );
       setInsights(response.data.content || []);
       pagination.setPaginationData(response.data);
-    } catch (error) {
+    } catch {
       addToast("Failed to load insights", "error");
     } finally {
       setIsLoading(false);
@@ -36,6 +36,7 @@ export const InsightsPage = () => {
 
   useEffect(() => {
     fetchInsights();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination.pageParams.page]);
 
   const handleGenerateInsight = async () => {
@@ -44,9 +45,9 @@ export const InsightsPage = () => {
       const response = await insightService.generateInsight();
       setInsights([response.data, ...insights]);
       addToast(response.message || "New insight generated!", "success");
-    } catch (error) {
+    } catch (err) {
       addToast(
-        error.response?.data?.message || "Failed to generate insight",
+        err.response?.data?.message || "Failed to generate insight",
         "error"
       );
     } finally {
@@ -64,7 +65,7 @@ export const InsightsPage = () => {
           prev.map((i) => (i.id === insight.id ? updatedInsight : i))
         );
         setSelectedInsight(updatedInsight);
-      } catch (error) {
+      } catch {
         addToast("Failed to mark insight as read", "error");
       }
     }
@@ -83,35 +84,36 @@ export const InsightsPage = () => {
       );
       setSelectedInsight(updatedInsight);
       addToast(response.message || "Thank you for your feedback!", "success");
-    } catch (error) {
+    } catch {
       addToast("Failed to submit feedback", "error");
     }
   };
   return (
     <>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} onToggle={setIsSidebarOpen}>
           <AppSidebar activeRoute={ROUTES.INSIGHTS} />
         </Sidebar>
-        {/* <Navbar /> */} {/* <-- THIS LINE IS NOW REMOVED */}
-        <main className="flex-1">
-          <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-            <div className="flex justify-between items-center mb-6">
-              <h1 className="text-3xl font-bold gradient-text">
-                Your Insights
-              </h1>
+        <div
+          className={`flex-1 transition-all duration-300 ease-in-out ${
+            isSidebarOpen ? "ml-72" : "ml-20"
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <h1 className="text-xl font-bold text-black">Insights</h1>
               <button
-                className="btn-primary"
+                className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                 onClick={handleGenerateInsight}
                 disabled={isGenerating}
               >
-                {isGenerating ? "Generating..." : "Generate New Insight"}
+                {isGenerating ? "Generating..." : "Generate"}
               </button>
             </div>
 
             {isLoading ? (
               <div className="flex justify-center items-center h-64">
-                <LoadingSpinner />
+                <LoadingSpinner size="sm" />
               </div>
             ) : (
               <InsightList
@@ -121,7 +123,7 @@ export const InsightsPage = () => {
             )}
 
             {!isLoading && insights.length === 0 && (
-              <p className="text-center text-gray-500 text-lg p-10 card">
+              <p className="text-center text-gray-500 text-lg p-10 bg-white border border-gray-200 rounded-lg">
                 No insights found. Start chatting with Haven to generate new
                 insights!
               </p>
@@ -129,7 +131,7 @@ export const InsightsPage = () => {
 
             <Pagination pagination={pagination} />
           </div>
-        </main>
+        </div>
       </div>
       {selectedInsight && (
         <InsightDetailModal
