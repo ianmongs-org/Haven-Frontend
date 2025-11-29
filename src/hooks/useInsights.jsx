@@ -4,7 +4,7 @@ import { useToast } from "../context/ToastContext";
 import { usePaginate } from "./usePaginate";
 
 const randomNumber = () => {
-  return Math.floor(Math.random() * 3) + 1;
+  return Math.floor(Math.random() * 10) + 1;
 };
 
 export const useInsights = () => {

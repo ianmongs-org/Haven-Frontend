@@ -105,7 +105,7 @@ function InsightChart() {
           to={ROUTES.INSIGHTS}
           className="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900"
         >
-          More
+          <span className=" hidden md:block">More</span>
           <IconChevronRight className="w-4 h-4" />
         </Link>
       </div>

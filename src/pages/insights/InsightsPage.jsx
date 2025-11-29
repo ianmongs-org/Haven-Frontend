@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { Navbar } from '../../components/layout/Navbar'; // <-- This is correctly commented/removed
 import { useToast } from "../../context/ToastContext";
 import { usePaginate } from "../../hooks/usePaginate";
 import insightService from "../../services/insight.service";
@@ -7,12 +6,15 @@ import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { Pagination } from "../../components/common/Pagination";
 import { InsightList } from "../../components/insights/InsightList";
 import { InsightDetailModal } from "../../components/insights/InsightDetailModal";
+import Sidebar, { AppSidebar } from "../../components/layout/Sidebar";
+import { ROUTES } from "../../utils/constants";
 
 export const InsightsPage = () => {
   const [insights, setInsights] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
   const [selectedInsight, setSelectedInsight] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { addToast } = useToast();
   const pagination = usePaginate({ initialSize: 9 });
 
@@ -88,6 +90,9 @@ export const InsightsPage = () => {
   return (
     <>
       <div className="flex flex-col min-h-screen">
+        <Sidebar isOpen={isSidebarOpen} onToggle={setIsSidebarOpen}>
+          <AppSidebar activeRoute={ROUTES.INSIGHTS} />
+        </Sidebar>
         {/* <Navbar /> */} {/* <-- THIS LINE IS NOW REMOVED */}
         <main className="flex-1">
           <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">

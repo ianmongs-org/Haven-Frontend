@@ -47,7 +47,7 @@ export const DashboardPage = () => {
   return (
     <div className="flex overflow-hidden">
       <Sidebar isOpen={isSidebarOpen} onToggle={setIsSidebarOpen}>
-        <AppSidebar />
+        <AppSidebar activeRoute={ROUTES.DASHBOARD} />
       </Sidebar>
       <div
         className={`flex-1 transition-all duration-300 ease-in-out ${
@@ -111,8 +111,8 @@ export const DashboardPage = () => {
                   Need immediate help?
                 </h3>
                 <p className="text-gray-700 mb-3 text-sm">
-                  If you're experiencing a mental health emergency, please reach
-                  out to a crisis helpline or emergency services immediately.
+                  Experiencing a mental health emergency? Reach out to a crisis
+                  helpline below.
                 </p>
                 <div className="flex items-center justify-between gap-3">
                   <a

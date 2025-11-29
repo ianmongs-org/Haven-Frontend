@@ -9,6 +9,8 @@ import {
   IconChartAreaFilled,
   IconLogout2,
 } from "@tabler/icons-react";
+import { ROUTES } from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const SidebarContext = createContext();
 
@@ -97,39 +99,44 @@ export default function Sidebar({
   );
 }
 
-export function AppSidebar() {
+export function AppSidebar({ activeRoute }) {
   return (
     <div className="flex flex-col items-center justify-between gap-1">
       <SidebarItem
         icon={<IconLayout2Filled className="w-6 h-6" />}
         label="Dashboard"
-        active={true}
+        active={activeRoute === ROUTES.DASHBOARD}
         alert={false}
+        route={ROUTES.DASHBOARD}
       />
       <SidebarItem
         icon={<IconMessage2Filled className="w-6 h-6" />}
         label="Chat"
-        active={false}
+        active={activeRoute === ROUTES.CHAT}
         alert={true}
+        route={ROUTES.CHAT}
       />
       <SidebarItem
         icon={<IconChartAreaFilled className="w-6 h-6" />}
         label="Insights"
-        active={false}
+        active={activeRoute === ROUTES.INSIGHTS}
         alert={false}
+        route={ROUTES.INSIGHTS}
       />
       <SidebarItem
         icon={<IconUserFilled className="w-6 h-6" />}
         label="Profile"
-        active={false}
+        active={activeRoute === ROUTES.PROFILE}
         alert={true}
+        route={ROUTES.PROFILE}
       />
     </div>
   );
 }
 
-export function SidebarItem({ icon, label, active, alert }) {
+export function SidebarItem({ icon, label, active, alert, route }) {
   const { isOpen } = useContext(SidebarContext);
+  const navigate = useNavigate();
   return (
     <li
       className={`
@@ -140,6 +147,7 @@ export function SidebarItem({ icon, label, active, alert }) {
         : "text-gray-600 hover:text-gray-900"
     }
     `}
+      onClick={() => navigate(route)}
     >
       {icon}
       <span
