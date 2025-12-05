@@ -2,6 +2,7 @@ import { LoadingSpinner } from "../common/LoadingSpinner";
 import { formatDistanceToNow } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../utils/constants";
+import { IconHome } from "@tabler/icons-react";
 
 export const ChatSidebar = ({
   selectedSessionId,
@@ -22,13 +23,19 @@ export const ChatSidebar = ({
 
   return (
     <div className="w-full sm:w-80 md:w-64 h-full border-r border-gray-200 flex flex-col bg-white">
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
         <button
           className="w-full text-sm font-medium py-2 px-4 border-2 border-black rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={onNewChat}
           disabled={isCreating}
         >
           {isCreating ? "Starting..." : "+ New Chat"}
+        </button>
+        <button
+          className="w-10 cursor-pointer h-10 text-sm font-medium py-2 px-4 border-0 border-black rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={() => navigate(ROUTES.DASHBOARD)}
+        >
+          <IconHome className="w-6 h-6" />
         </button>
       </div>
       <div className="flex-1 overflow-y-auto p-2 space-y-1">
